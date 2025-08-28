@@ -7,5 +7,16 @@
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        ans = -10001
+        def dfs(node):
+            nonlocal ans
+            if not node:
+                return 0
+            l = dfs(node.left)
+            r = dfs(node.right)
+            ans = max(ans, l + r + node.val)
+            return max(max(l, r) + node.val, 0)
+        dfs(root)
+        return ans
         
 # leetcode submit region end(Prohibit modification and deletion)
